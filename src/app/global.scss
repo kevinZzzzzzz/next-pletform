@@ -11,6 +11,8 @@ p {
 }
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
+  font-weight: 100;
+  font-size: 16px;
 }
 ul {
   padding: 0;
@@ -22,4 +24,11 @@ ul {
 * {
   box-sizing: border-box;
   font-family: 'PingFangSC-Regular', 'PingFang SC';
+}
+.divider10 {
+  width: 100%;
+  height: 10px;
+}
+.link--unstyled {
+  text-decoration: none !important;
 }

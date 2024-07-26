@@ -1,4 +1,5 @@
 import "./global.scss";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 export const metadata = {
   title: "Hello NextJs",
@@ -12,7 +13,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <main>{children}</main>
+        <main>
+          <AntdRegistry>{children}</AntdRegistry>
+        </main>
       </body>
     </html>
   );

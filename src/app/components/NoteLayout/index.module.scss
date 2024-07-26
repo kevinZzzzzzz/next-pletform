@@ -1,0 +1,51 @@
+@mixin ctxLayout($height: 100vh, $padding: 20px) {
+  height: $height;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: $padding;
+  box-sizing: border-box;
+}
+.noteLayout {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  &_left {
+    box-shadow: 10px 0px 5px #ccc;
+    @include ctxLayout();
+    &_header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      img {
+        width: 30px;
+        height: 30px;
+        animation: imgRotate 5s linear infinite;
+      }
+      h1 {
+        margin-left: 10px;
+        font-size: 30px;
+        font-weight: 400;
+        color: #1296db;
+        border-bottom: 1px solid #1296db;
+      }
+    }
+  }
+  &_right {
+    &_main {
+      @include ctxLayout()
+    }
+  }
+  &_left::-webkit-scrollbar, &_right_main::-webkit-scrollbar {
+    display: none;
+  }
+}
+@keyframes imgRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

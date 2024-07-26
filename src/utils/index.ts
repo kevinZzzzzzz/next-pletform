@@ -9,5 +9,18 @@ const getThemeBg = (theme = true) => {
         color: "rgba(0, 0, 0, 1)",
       };
 };
+/**
+ * Note 全局主题样式
+ */
+const noteThemeJson = {
+  token: {
+    colorPrimary: "#1296db",
+  },
+  components: {
+    Input: {
+      hoverBorderColor: "#1296db",
+    },
+  },
+};
 
-export default getThemeBg;
+export { getThemeBg, noteThemeJson };

@@ -1,0 +1,46 @@
+.searchComp {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-gap: 10px;
+}
+
+.noteEdit {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 30px;
+  &_edit {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end;
+    margin-bottom: 10px;
+  }
+  &_preview {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    h1 {
+      font-size: 20px;
+      font-weight: 600;
+      padding: 8px 10px;
+      background-color: rgba(18, 150, 219, .4);
+      border-radius: 20px;
+      color: #1296db;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.previewComp {
+  h1 {
+    font-size: 40px;
+    font-weight: 600;
+    color: #000;
+    padding: 0px;
+    background-color: #fff;
+    margin-bottom: 0px;
+  }
+}
+.headerComp {
+  height: 64px;
+  border-bottom: 1px solid #ccc;
+}

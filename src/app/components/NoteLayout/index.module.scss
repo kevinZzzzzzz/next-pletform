@@ -13,7 +13,7 @@
   grid-template-columns: 1fr 4fr;
   &_left {
     box-shadow: 10px 0px 5px #ccc;
-    @include ctxLayout();
+    @include ctxLayout(100vh, 10px);
     &_header {
       display: flex;
       align-items: center;
@@ -31,15 +31,22 @@
         border-bottom: 1px solid #1296db;
       }
     }
+    &_main {
+      height: calc(100vh - 40px - 20px - 43px);
+      overflow-y: scroll;
+      overflow-x: hidden;
+      padding: 0 5px 10px;
+      position: relative;
+    }
   }
   &_right {
     &_main {
       @include ctxLayout()
     }
   }
-  &_left::-webkit-scrollbar, &_right_main::-webkit-scrollbar {
-    display: none;
-  }
+  // &_left::-webkit-scrollbar, &_right_main::-webkit-scrollbar {
+  //   display: none;
+  // }
 }
 @keyframes imgRotate {
   from {

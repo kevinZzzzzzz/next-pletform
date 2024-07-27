@@ -2,7 +2,7 @@
 
 import { Divider } from "antd";
 import React, { useState, useEffect, memo, use, useMemo } from "react";
-import styles from "./compStyle.module.scss";
+import styles from "./index.module.scss";
 
 function PreviewComp(props: any) {
   const { previewData } = props;

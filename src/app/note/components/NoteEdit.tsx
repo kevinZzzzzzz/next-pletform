@@ -1,11 +1,12 @@
 "use client";
 import { CheckOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect, useMemo, memo } from "react";
-import styles from "./compStyle.module.scss";
+import styles from "./index.module.scss";
 import PreviewComp from "./PreviewComp";
+import { saveNote } from "../action";
 
 const initialValues: {
   title: string;
@@ -16,6 +17,7 @@ const initialValues: {
 };
 const { Item: FormItem } = Form;
 function NoteEdit(props: any) {
+  const [noteId, setNoteId] = useState("");
   const [editForm] = Form.useForm(); // 搜索表单
   const [previewData, setPreViewData] = useState(initialValues);
   const [loading, setLoading] = useState(false);
@@ -27,7 +29,18 @@ function NoteEdit(props: any) {
     try {
       await editForm.validateFields();
       setLoading(true);
-      router.push("/note");
+      const result: any = await saveNote({
+        ...editForm.getFieldsValue(),
+        noteId,
+      });
+      setLoading(false)
+      if (result.succ) {
+        message.success(result.message);
+        router.push("/note");
+        router.refresh()
+      } else {
+        message.error(result.message);
+      }
     } catch (errorInfo) {
       console.log("Failed:", errorInfo);
     }
@@ -86,7 +99,7 @@ function NoteEdit(props: any) {
                   };
                 });
               }}
-              style={{ height: "70vh", resize: "none" }}
+              style={{ height: "70vh" }}
             />
           </FormItem>
         </Form>

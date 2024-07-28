@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import styles from "./index.module.scss";
 
-function NoteLayout(props: any) {
+async function NoteLayout(props: any) {
   const { children } = props;
   let leftHeaderComp = null;
   let leftMainComp = null;
@@ -20,6 +20,18 @@ function NoteLayout(props: any) {
       rightMainComp = d;
     }
   });
+
+  // const session = await auth()
+  // if (!session) {
+  //   // redirect: {
+  //   //   destination: '/login',
+  //   //   permanent: false,
+  //   // },
+  //   router.push('/note/login')
+  //   return null
+  // }
+
+  // }
   return (
     <div className={styles.noteLayout}>
       <div className={styles.noteLayout_left}>

@@ -1,13 +1,13 @@
 "use client";
-import { CheckOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Form, Input, message } from "antd";
+import { CheckOutlined, CloseOutlined, EditOutlined, ExclamationCircleFilled } from "@ant-design/icons";
+import { Button, Divider, Form, Input, message, Modal } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect, useMemo, memo } from "react";
 import styles from "./index.module.scss";
 import PreviewComp from "./PreviewComp";
-import { saveNote } from "../action";
-
+import { delNote, saveNote } from "../action";
+const { confirm } = Modal;
 const initialValues: {
   title: string;
   content: string;
@@ -17,11 +17,21 @@ const initialValues: {
 };
 const { Item: FormItem } = Form;
 function NoteEdit(props: any) {
-  const [noteId, setNoteId] = useState("");
+  const { noteId, note } = props;
   const [editForm] = Form.useForm(); // 搜索表单
   const [previewData, setPreViewData] = useState(initialValues);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  useEffect(() => {
+    if (note) {
+      editForm.setFieldsValue(note);
+      setPreViewData(note);
+    }
+  }, []);
+  // 是否是编辑模式
+  const isEdit = useMemo(() => {
+    return !!noteId;
+  }, [noteId]);
   /**
    * 提交内容
    */
@@ -33,11 +43,11 @@ function NoteEdit(props: any) {
         ...editForm.getFieldsValue(),
         noteId,
       });
-      setLoading(false)
+      setLoading(false);
       if (result.succ) {
         message.success(result.message);
         router.push("/note");
-        router.refresh()
+        router.refresh();
       } else {
         message.error(result.message);
       }
@@ -45,20 +55,60 @@ function NoteEdit(props: any) {
       console.log("Failed:", errorInfo);
     }
   };
+
+  /**
+   * 删除笔记
+   */
+  const deleteNote = () => {
+    confirm({
+      title: '是否删除该笔记?',
+      icon: <ExclamationCircleFilled />,
+      content: '',
+      async onOk() {
+        // TODO: 删除笔记
+      const result: any = await delNote(noteId);
+      if (result.succ) {
+        message.success(result.message);
+        router.push("/note");
+        router.refresh();
+      } else {
+        message.error(result.message);
+      }
+      },
+    });
+  }
   return (
     <div className={styles.noteEdit}>
       <div className={styles.noteEdit_edit}>
-        <Button
-          type="primary"
-          loading={loading}
-          icon={<CheckOutlined />}
-          size="large"
-          onClick={() => {
-            submitForm();
-          }}
-        >
-          DONE
-        </Button>
+        <div className={styles.noteEdit_edit_btn}>
+          <Button
+            type="primary"
+            loading={loading}
+            icon={<CheckOutlined />}
+            size="large"
+            onClick={() => {
+              submitForm();
+            }}
+          >
+            DONE
+          </Button>
+          {isEdit ? (
+            <>
+              <Divider type="vertical" />
+              <Button
+                type="primary"
+                danger
+                icon={<CloseOutlined />}
+                size="large"
+                onClick={() => {
+                  deleteNote();
+                }}
+              >
+                DELETE
+              </Button>
+            </>
+          ) : null}
+        </div>
         <div className="divider10"></div>
         <Form
           name="editDataForm"

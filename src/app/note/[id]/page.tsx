@@ -1,7 +1,13 @@
 import React, { useState, useEffect, memo } from "react";
 import NoteEdit from "../components/NoteEdit";
+import NoteDetailComp from "../components/NoteDetailComp";
+import { getNoteDetail } from "@/lib/prisma";
 
-function EditComp(props: any) {
-  return <NoteEdit />;
+async function noteDetailComp(props: any) {
+    const {id: noteId} = props.params;
+    const note = await getNoteDetail(noteId);
+    return (
+        <NoteDetailComp noteId={noteId} note={note} />
+    );
 }
-export default memo(EditComp);
+export default memo(noteDetailComp);

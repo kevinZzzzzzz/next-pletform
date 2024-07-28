@@ -37,7 +37,7 @@ const nextAuth = NextAuth({
     }),
   ],
   pages: {
-    signIn: "/note/login",
+    signIn: "/login",
   },
   callbacks: {
     authorized({ request, auth }) {

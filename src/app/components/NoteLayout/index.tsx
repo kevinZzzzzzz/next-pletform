@@ -20,18 +20,7 @@ async function NoteLayout(props: any) {
       rightMainComp = d;
     }
   });
-
-  // const session = await auth()
-  // if (!session) {
-  //   // redirect: {
-  //   //   destination: '/login',
-  //   //   permanent: false,
-  //   // },
-  //   router.push('/note/login')
-  //   return null
-  // }
-
-  // }
+  
   return (
     <div className={styles.noteLayout}>
       <div className={styles.noteLayout_left}>

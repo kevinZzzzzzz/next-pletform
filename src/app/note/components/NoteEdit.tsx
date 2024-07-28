@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import React, { useState, useEffect, useMemo, memo } from "react";
 import styles from "./index.module.scss";
 import PreviewComp from "./PreviewComp";
-import { delNote, saveNote } from "../action";
+import { delNote, saveNote } from "../../../lib/action";
 const { confirm } = Modal;
 const initialValues: {
   title: string;

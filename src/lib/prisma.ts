@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client'
 import {isEmptyObject} from '@/utils/index'
 import dayjs from 'dayjs'
 import {auth} from './auth'
+import { message } from 'antd'
 
 const globalForPrisma: any = global
 export const prisma = globalForPrisma.prisma || new PrismaClient()
@@ -143,6 +144,11 @@ export async function getUser(username?: string, password?: string) {
  */
 export async function registerUser(username?: string, password?: string) {
     if (!username || !password) return false
+    const userIsExist = await getUser(username)
+    if (userIsExist) {
+        message.error('该用户已存在')
+        return false
+    }
     const user = await prisma.user.create({
         data: {
             username,
@@ -152,10 +158,10 @@ export async function registerUser(username?: string, password?: string) {
             }
         }
     })
-    return {
+    return user ? {
         name: username,
         username,
         userId: user.id
-    }
+    } : null
 }
 export default prisma

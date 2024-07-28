@@ -1,5 +1,5 @@
 'use server'
-import { addNote, deleteNote, updateNote } from "@/lib/prisma"
+import { addNote, deleteNote, registerUser, updateNote } from "@/lib/prisma"
 import dayjs from "dayjs"
 
 /**
@@ -26,4 +26,12 @@ export async function saveNote(noteData: any) {
  */
 export async function delNote(noteId: string | number) {
     return await deleteNote(noteId)
+}
+
+
+/**
+ * 注册用户
+ */
+export async function registerUsers(data: any) {
+    return await registerUser(data.username, data.password)
 }

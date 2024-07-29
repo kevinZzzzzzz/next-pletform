@@ -2,7 +2,7 @@
 import styles from "./index.module.scss";
 import { withRouter } from "next/router";
 
-const HomePage = (props) => {
+const HomePage = () => {
   return (
     <>
       <h1>首页</h1>

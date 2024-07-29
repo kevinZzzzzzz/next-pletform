@@ -105,6 +105,8 @@ const LoginPage = (props: any) => {
     <div className={styles.loginPage}>
       <div className={styles.loginPage_block}>
         <Tabs
+          centered
+          size="large"
           activeKey={tabNo}
           items={items}
           onChange={(key) => {

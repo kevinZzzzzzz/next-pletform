@@ -1,13 +1,14 @@
 "use client";
 import React, { useState, useEffect, memo, useCallback } from "react";
-import { Button, Checkbox, Form, Input, Tabs, TabsProps } from "antd";
+import { Button, Checkbox, Form, Input, message, Tabs, TabsProps } from "antd";
 import styles from "./index.module.scss";
 import { registerUsers } from "@/lib/action";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 const LoginComp = (props: any) => {
   const [token, setToken] = useState("");
-  const router = useRouter()
+  const router = useRouter();
   const { tabNo, changeTabs } = props;
   const [loginForm] = Form.useForm(); // 登录表单
   const [registerForm] = Form.useForm(); // 注册表单
@@ -17,24 +18,21 @@ const LoginComp = (props: any) => {
   };
   const onFinish = async (values: any) => {
     if (tabNo == "1") {
-      // const response= await signIn('credentials',{  //nextauth 登录模块
-      const response = await fetch("/api/auth/callback/credentials", {
-        //nextauth 登录模块
-        method: "POST",
-        body: JSON.stringify({
-          username: values.username,
-          password: values.password,
-          'csrfToken': token
-        }),
-        headers: {
-          'Content-Type': 'application/json', 
-        }
+      const response: any = await signIn("credentials", {
+        username: values.username,
+        password: values.password,
+        redirect: false,
+        callbackUrl: "http://localhost:3000/note",
       });
-      console.log(response, 123123);
-      
-      // message.success("登录成功");
+      if (response.error) {
+        // 这里你可以弹出一个提示窗口
+        message.error("登录失败: 账号密码错误或者账号不存在");
+      } else {
+        window.location.href = response.url;
+        message.success("登录成功");
+      }
     } else {
-      // message.success("注册成功");
+      message.success("注册成功");
       await registerUsers(values);
       registerForm.resetFields();
       changeTabs("1");
@@ -68,17 +66,17 @@ const LoginComp = (props: any) => {
         name="username"
         rules={[{ required: true, message: "请输入账号!" }]}
       >
-        <Input placeholder="请输入账号!" />
+        <Input size="middle" placeholder="请输入账号!" />
       </Form.Item>
       <Form.Item
         label="密码"
         name="password"
         rules={[{ required: true, message: "请输入密码!" }]}
       >
-        <Input.Password placeholder="请输入密码!" />
+        <Input.Password size="middle" placeholder="请输入密码!" />
       </Form.Item>
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
+      <Form.Item wrapperCol={{ offset: 0 }}>
+        <Button block type="primary" htmlType="submit">
           {tabNo == "1" ? "登录" : "注册"}
         </Button>
       </Form.Item>
@@ -105,13 +103,15 @@ const LoginPage = (props: any) => {
 
   return (
     <div className={styles.loginPage}>
-      <Tabs
-        activeKey={tabNo}
-        items={items}
-        onChange={(key) => {
-          changeTabs(key);
-        }}
-      />
+      <div className={styles.loginPage_block}>
+        <Tabs
+          activeKey={tabNo}
+          items={items}
+          onChange={(key) => {
+            changeTabs(key);
+          }}
+        />
+      </div>
     </div>
   );
 };

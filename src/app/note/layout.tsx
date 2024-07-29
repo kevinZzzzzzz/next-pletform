@@ -11,9 +11,12 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  primaryColor,
 }: {
   children: React.ReactNode;
+  primaryColor: any;
 }) {
+  console.log(primaryColor);
   return (
     <ConfigProvider theme={noteThemeJson}>
       <NoteLayout>
@@ -22,9 +25,7 @@ export default function RootLayout({
           <NoteListComp />
         </div>
         <div slot="main">
-          <RouterAuth>
-            {children}
-          </RouterAuth>
+          <RouterAuth>{children}</RouterAuth>
         </div>
       </NoteLayout>
     </ConfigProvider>

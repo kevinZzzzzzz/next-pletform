@@ -27,8 +27,8 @@
         margin-left: 10px;
         font-size: 30px;
         font-weight: 400;
-        color: #1296db;
-        border-bottom: 1px solid #1296db;
+        color: var(--global-color);
+        border-bottom: 1px solid var(--global-color);
       }
     }
     &_main {

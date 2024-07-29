@@ -1,9 +1,10 @@
+"use server";
 import HeaderComp from "@/app/note/components/HeaderComp";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import styles from "./index.module.scss";
 
-async function NoteLayout(props: any) {
+function NoteLayout(props: any) {
   const { children } = props;
   let leftHeaderComp = null;
   let leftMainComp = null;
@@ -20,7 +21,7 @@ async function NoteLayout(props: any) {
       rightMainComp = d;
     }
   });
-  
+
   return (
     <div className={styles.noteLayout}>
       <div className={styles.noteLayout_left}>

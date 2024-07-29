@@ -1,7 +1,7 @@
 /**
  * 获取全局主题颜色
  * @param theme true:暗色主题 false:亮色主题
- * @returns 
+ * @returns
  */
 export const getThemeBg = (theme = true) => {
   return theme
@@ -19,18 +19,18 @@ export const getThemeBg = (theme = true) => {
  */
 export const noteThemeJson = {
   token: {
-    colorPrimary: "#1296db",
+    colorPrimary: "#126cdb",
   },
   components: {
     Input: {
-      hoverBorderColor: "#1296db",
+      hoverBorderColor: "#126cdb",
     },
   },
 };
 
 /**
  * 获取当前时间
- * @returns 
+ * @returns
  */
 export const getCurrentTime = () => {
   const date = new Date();
@@ -49,13 +49,14 @@ export const getCurrentTime2 = () => new Date().toLocaleString();
 /**
  * 睡眠函数
  */
-export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+export const sleep = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
 
 /**
  * 判断是否是空对象
  * * @param obj
  */
 export const isEmptyObject = (obj: any) => {
-  if ( obj === null || obj === undefined ) return true;
+  if (obj === null || obj === undefined) return true;
   return Object.keys(obj).length === 0;
-}
+};

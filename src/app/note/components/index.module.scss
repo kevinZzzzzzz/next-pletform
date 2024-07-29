@@ -75,7 +75,7 @@
       padding: 8px 10px;
       background-color: rgba(18, 150, 219, .4);
       border-radius: 20px;
-      color: #1296db;
+      color: var(--global-color);
       margin-bottom: 20px;
     }
   }
@@ -139,4 +139,10 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+}
+.headerComp {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }

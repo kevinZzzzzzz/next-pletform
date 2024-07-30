@@ -3,6 +3,7 @@ import NoteListComp from "./components/NoteListComp";
 import { ConfigProvider } from "antd";
 import { noteThemeJson } from "@/utils";
 import RouterAuth from "@/app/components/RouterAuth";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "笔记本",
@@ -16,7 +17,6 @@ export default function RootLayout({
   children: React.ReactNode;
   primaryColor: any;
 }) {
-  console.log(primaryColor);
   return (
     <ConfigProvider theme={noteThemeJson}>
       <NoteLayout>
@@ -25,7 +25,9 @@ export default function RootLayout({
           <NoteListComp />
         </div>
         <div slot="main">
-          <RouterAuth>{children}</RouterAuth>
+          <Suspense fallback={<>123</>}>
+            <RouterAuth>{children}</RouterAuth>
+          </Suspense>
         </div>
       </NoteLayout>
     </ConfigProvider>

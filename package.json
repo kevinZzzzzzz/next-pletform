@@ -4,7 +4,11 @@
   "private": true,
   "main": "main.js",
   "scripts": {
+<<<<<<< HEAD
     "dev": "npx prisma generate && start http://localhost:3000/note && next dev",
+=======
+    "dev": "npx prisma generate && next dev",
+>>>>>>> a38b728c3a0fb0c14a10ce8cf1636de14ea2a99e
     "dev-ele": "electron . | next dev",
     "build": "npx prisma generate && npx prisma db push && next build",
     "start": "next start",
@@ -17,7 +21,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "antd": "^5.19.3",
     "dayjs": "^1.11.12",
-    "electron": "^31.3.0",
+    "electron": "^31.3.1",
     "hoslink-xxx": "^1",
     "next": "14.2.5",
     "next-auth": "^5.0.0-beta.5",

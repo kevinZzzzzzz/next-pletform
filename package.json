@@ -4,7 +4,7 @@
   "private": true,
   "main": "main.js",
   "scripts": {
-    "dev": "npx prisma generate && next dev",
+    "dev": "npx prisma generate && start http://localhost:3000/note && next dev",
     "dev-ele": "electron . | next dev",
     "build": "npx prisma generate && npx prisma db push && next build",
     "start": "next start",
